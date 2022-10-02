@@ -1,0 +1,472 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://addons/monitor_overlay/monitor_overlay.gd" type="Script" id=1]
+[ext_resource path="res://resources/import3D/floor.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://resources/textures/Floor_TM.png" type="Texture" id=3]
+[ext_resource path="res://resources/textures/Floor_RM.png" type="Texture" id=4]
+[ext_resource path="res://resources/import3D/terrain/test/chunk.obj" type="ArrayMesh" id=6]
+
+[sub_resource type="ProceduralSky" id=2]
+sky_top_color = Color( 0.603922, 0.74902, 0.831373, 1 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+tonemap_mode = 3
+tonemap_white = 6.0
+
+[sub_resource type="NavigationMesh" id=12]
+vertices = PoolVector3Array( -7.5, 0.25, -13.25, -15.25, 0.25, -13.25, -15.25, 0.25, -11.75, -7.5, 0.25, -13.25, -15.25, 0.25, -11.75, -15.75, 0.25, -11.25, 4.5, 0.25, -11.25, 0.25, 0.25, -13.25, -24.5, 0.25, -23.25, -24.5, 0.25, -16.5, -18.25, 0.25, -16.5, -17.25, 0.25, -23.25, 4.5, 0.25, -11.25, 0.75, 0.25, -16.25, 0.75, 0.25, -13.75, -17.25, 0.25, -23.25, -18.25, 0.25, -16.5, -11.75, 0.25, -16.5, -10, 0.25, -23.25, 4.5, 0.25, -11.25, 0.75, 0.25, -13.75, 0.25, 0.25, -13.25, -10, 0.25, -23.25, -11.75, 0.25, -16.5, -5.5, 0.25, -16.5, -2.75, 0.25, -23.25, 0.75, 0.25, -16.25, 4.5, 0.25, -11.25, 4.5, 0.25, -23.25, -2.75, 0.25, -23.25, -2.75, 0.25, -23.25, -5.5, 0.25, -16.5, 0.75, 0.25, -16.25, 19.75, 0.25, -14.75, 19.25, 0.25, -14.25, 22.5, 0.25, -14.25, 7.75, 0.25, -23.25, 7.75, 0.25, -21.5, 10.75, 0.25, -21.5, 15, 0.25, -23.25, 19.5, 0.25, -21.5, 19.75, 0.25, -14.75, 22.5, 0.25, -14.25, 22.5, 0.25, -23.25, 15, 0.25, -23.25, 10.75, 0.25, -21.5, 19.5, 0.25, -21.5, 22.5, 0.25, -23.25, 7.75, 0.25, -10.25, 10.75, 0.25, -10.25, 10.75, 0.25, -21.5, 7.75, 0.25, -21.5, 16.5, 0.25, -14.5, 16.5, 0.25, -18.25, 13.75, 0.25, -18.25, 13.75, 0.25, -10.75, 19.25, 0.25, -14.25, 16.5, 0.25, -14.5, 13.75, 0.25, -10.75, 22.5, 0.25, -10.25, 22.5, 0.25, -14.25, 19.25, 0.25, -14.25, 13.75, 0.25, -10.75, 13.25, 0.25, -10.25, -1.25, 0.25, -10.5, 4.5, 0.25, -10.5, 4.5, 0.25, -11.25, -15.75, 0.25, -11.25, -18.25, 0.25, -11.25, -18.5, 0.25, -13.25, -24.5, 0.25, -13.25, -24.5, 0.25, -7.5, -18.25, 0.25, -7.5, -15.25, 0.25, -7.25, -1.25, 0.25, -7.25, -1.25, 0.25, -10.5, -15.75, 0.25, -11.25, -18.25, 0.25, -11.25, -18.25, 0.25, -7.5, 19.5, 0.25, -9.5, 22.5, 0.25, -9.5, 22.5, 0.25, -10.25, 10.75, 0.25, -10.25, 7.75, 0.25, -10.25, 7.75, 0.25, -7.75, 13.25, 0.25, -10.25, 10.75, 0.25, -10.25, 7.75, 0.25, -7.75, 7.25, 0.25, -7.25, 16.5, 0.25, -7.25, 16.75, 0.25, -9.5, 16.75, 0.25, -9.5, 19.5, 0.25, -9.5, 22.5, 0.25, -10.25, 13.25, 0.25, -10.25, 19.75, 0.5, 19.25, 19.25, 0.5, 19.75, 24.5, 0.5, 19.75, 22.5, 0.25, -9.5, 19.5, 0.25, -9.5, 19.75, 0.5, -2.5, 22.5, 0.5, -1.5, 19.75, 0.5, 4.75, 19.75, 0.5, 12, 24.5, 0.5, 9.25, 24.5, 0.5, -1.25, 22.5, 0.5, -1.5, 22.5, 0.5, -1.5, 19.75, 0.5, -2.5, 19.75, 0.5, 4.75, 24.5, 0.5, 19.75, 24.5, 0.5, 9.25, 19.75, 0.5, 12, 19.75, 0.5, 19.25, -24.5, 0.5, 19.75, -18.25, 0.5, 19.75, -18.5, 0.5, 13, -24.5, 0.5, 12.75, -24.5, 0.5, 12.75, -18.5, 0.5, 13, -18.5, 0.5, 6, -24.5, 0.5, 6, -18.5, 0.5, -0.75, -18.25, 0.25, -7.5, -24.5, 0.25, -7.5, -24.5, 0.5, -0.75, -24.5, 0.5, -0.75, -24.5, 0.5, 6, -18.5, 0.5, 6, -18.5, 0.5, -0.75, -15.25, 0.5, 1.5, -15.25, 0.5, 10.5, -6.5, 0.5, 10.5, 16.5, 0.5, 2, 16.5, 0.25, -7.25, 7.25, 0.25, -7.25, 2.5, 0.5, 10.5, 2.5, 1.5, 11.5, 16.5, 0.5, 11.5, 16.5, 0.5, 2, 3.9, 1.5, 11.5, 5.3, 0.5, 11.5, 2.5, 0.5, 10.5, 16.5, 0.5, 2, 7.25, 0.25, -7.25, -1.25, 0.25, -7.25, -15.25, 0.5, 1.5, -6.5, 0.5, 10.5, -1.25, 0.25, -7.25, -15.25, 0.25, -7.25, -15.25, 0.5, 1.5, 6.75, 0.5, 19.25, 6.25, 0.5, 19.75, 8.75, 0.5, 19.75, 6.75, 0.5, 19.25, 8.75, 0.5, 19.75, 8.75, 0.5, 16.5, 6.5, 0.5, 16.5, -8.25, 7.5, 16.5, -6.75, 6.5, 11.5, -16, 8.5, 11.5, -17.5, 8.5, 16.5, -10.8929, 8.5, 16.5, -9.57143, 7.5, 16.5, -7.5, 6.5, 14, -8.07143, 7.5, 11.5, -9.39286, 7.5, 11.5, -10.7143, 8.5, 11.5, 8.75, 0.5, 16.5, 16.5, 0.5, 16.5, 16.5, 0.5, 11.5, 2.5, 1.5, 11.5, 3.54167, 1.5, 12.3333, 4.58333, 0.5, 13.1667, 5.3, 0.5, 11.5, 3.9, 1.5, 11.5, -16.5, 8.5, 3.25, -16.25, 8.5, -6.5, -17.5, 8.5, -6.5, -17.5, 8.5, 5, 6.5, 0.5, 16.5, 8.75, 0.5, 16.5, 2.5, 1.5, 11.5, 4.1, 1.25, 13.5, 4.9, 0.5, 14.5, 4.58333, 0.5, 13.1667, 3.54167, 1.5, 12.3333, -1, 3.5, 16.5, 6.5, 0.5, 16.5, 2.5, 1.5, 11.5, 1.8, 2.5, 12.5, 0.4, 2.5, 14.5, -0.299999, 3.5, 15.5, 0.25, 2.5, 16.5, 1.5, 2.5, 16.5, 2.75, 1.5, 16.5, 5.25, 0.5, 16.5, 4.9, 0.5, 14.5, 4.1, 1.25, 13.5, 1.475, 2.5, 14.475, -1, 3.5, 16.5, 2.5, 1.5, 11.5, -6.75, 6.5, 11.5, -8.25, 7.5, 16.5, -5.35, 5.5, 16.5, -3.9, 5.25, 16.5, -0.299999, 3.5, 15.5, 0.4, 2.5, 14.5, 1.8, 2.5, 12.5, -0.142857, 3.5, 11.5, -1.46428, 3.5, 11.5, -4.10714, 5.5, 11.5, -5.42857, 5.5, 11.5, -7.5, 6.5, 14, 0.015049, 3.25, 13.0189, -5.99994, 6.25, 14.4799, -1.4949, 3.5, 14.5129, -17.5, 8.5, 5, -17.5, 8.5, 16.5, -16, 8.5, 11.5, -16.5, 8.5, 3.25, 5.75, 8.5, 18.75, 5.75, 8.5, 17.5, -1.25, 8.5, 17.5, -6, 8.5, 18.75, -17.5, 8.5, 18.75, -6, 8.5, 18.75, -8.25, 8.5, 17.5, -17.5, 8.5, 16.5, -6, 8.5, 18.75, -1.25, 8.5, 17.5, -8.25, 8.5, 17.5, -8.25, 8.5, 17.5, -8.25, 7.5, 16.5, -17.5, 8.5, 16.5, -9.57143, 7.5, 16.5, -10.8929, 8.5, 16.5, 24.5, 0.5, 24.5, 24.5, 0.5, 19.75, 19.25, 0.5, 19.75, 18.25, 0.5, 24.5, 6, 0.5, 24.5, 6.25, 0.5, 19.75, 0, 0.5, 19.75, 0, 0.5, 24.5, -24.5, 0.5, 19.75, -24.5, 0.5, 24.5, -18.5, 0.5, 24.5, -18.25, 0.5, 19.75, 19.25, 0.5, 19.75, 8.75, 0.5, 19.75, 12.25, 0.5, 24.5, 18.25, 0.5, 24.5, -18.25, 0.5, 19.75, -18.5, 0.5, 24.5, -12.25, 0.5, 24.5, -12.25, 0.5, 19.75, 6, 0.5, 24.5, 12.25, 0.5, 24.5, 8.75, 0.5, 19.75, 6.25, 0.5, 19.75, -12.25, 0.5, 19.75, -12.25, 0.5, 24.5, -6.25, 0.5, 24.5, -6, 0.5, 19.75, -6, 0.5, 19.75, -6.25, 0.5, 24.5, 0, 0.5, 24.5, 0, 0.5, 19.75 )
+polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 7 ), PoolIntArray( 5, 7, 6 ), PoolIntArray( 9, 8, 10 ), PoolIntArray( 10, 8, 11 ), PoolIntArray( 14, 13, 12 ), PoolIntArray( 16, 15, 17 ), PoolIntArray( 17, 15, 18 ), PoolIntArray( 19, 21, 20 ), PoolIntArray( 23, 22, 24 ), PoolIntArray( 24, 22, 25 ), PoolIntArray( 29, 28, 26 ), PoolIntArray( 26, 28, 27 ), PoolIntArray( 32, 31, 30 ), PoolIntArray( 35, 34, 33 ), PoolIntArray( 37, 36, 38 ), PoolIntArray( 38, 36, 39 ), PoolIntArray( 41, 40, 42 ), PoolIntArray( 42, 40, 43 ), PoolIntArray( 47, 46, 44 ), PoolIntArray( 44, 46, 45 ), PoolIntArray( 51, 50, 48 ), PoolIntArray( 48, 50, 49 ), PoolIntArray( 53, 52, 54 ), PoolIntArray( 54, 52, 55 ), PoolIntArray( 56, 58, 57 ), PoolIntArray( 60, 59, 61 ), PoolIntArray( 61, 59, 62 ), PoolIntArray( 62, 59, 63 ), PoolIntArray( 65, 64, 66 ), PoolIntArray( 66, 64, 67 ), PoolIntArray( 68, 72, 69 ), PoolIntArray( 69, 72, 70 ), PoolIntArray( 70, 72, 71 ), PoolIntArray( 77, 76, 78 ), PoolIntArray( 78, 76, 73 ), PoolIntArray( 73, 76, 75 ), PoolIntArray( 73, 75, 74 ), PoolIntArray( 81, 80, 79 ), PoolIntArray( 84, 83, 82 ), PoolIntArray( 87, 86, 88 ), PoolIntArray( 88, 86, 85 ), PoolIntArray( 88, 85, 90 ), PoolIntArray( 88, 90, 89 ), PoolIntArray( 92, 91, 93 ), PoolIntArray( 93, 91, 94 ), PoolIntArray( 97, 96, 95 ), PoolIntArray( 99, 98, 100 ), PoolIntArray( 100, 98, 101 ), PoolIntArray( 106, 105, 102 ), PoolIntArray( 102, 105, 104 ), PoolIntArray( 102, 104, 103 ), PoolIntArray( 109, 108, 107 ), PoolIntArray( 113, 112, 110 ), PoolIntArray( 110, 112, 111 ), PoolIntArray( 115, 114, 116 ), PoolIntArray( 116, 114, 117 ), PoolIntArray( 121, 120, 118 ), PoolIntArray( 118, 120, 119 ), PoolIntArray( 125, 124, 122 ), PoolIntArray( 122, 124, 123 ), PoolIntArray( 129, 128, 126 ), PoolIntArray( 126, 128, 127 ), PoolIntArray( 132, 131, 130 ), PoolIntArray( 135, 134, 133 ), PoolIntArray( 137, 136, 140 ), PoolIntArray( 140, 136, 141 ), PoolIntArray( 141, 136, 138 ), PoolIntArray( 138, 136, 139 ), PoolIntArray( 147, 146, 142 ), PoolIntArray( 142, 146, 145 ), PoolIntArray( 142, 145, 144 ), PoolIntArray( 142, 144, 143 ), PoolIntArray( 150, 149, 148 ), PoolIntArray( 153, 152, 151 ), PoolIntArray( 157, 156, 154 ), PoolIntArray( 154, 156, 155 ), PoolIntArray( 159, 164, 165 ), PoolIntArray( 165, 164, 166 ), PoolIntArray( 166, 164, 167 ), PoolIntArray( 167, 164, 158 ), PoolIntArray( 167, 158, 163 ), PoolIntArray( 167, 163, 162 ), PoolIntArray( 167, 162, 160 ), PoolIntArray( 160, 162, 161 ), PoolIntArray( 171, 175, 172 ), PoolIntArray( 172, 175, 173 ), PoolIntArray( 173, 175, 174 ), PoolIntArray( 173, 174, 168 ), PoolIntArray( 168, 174, 169 ), PoolIntArray( 169, 174, 170 ), PoolIntArray( 177, 176, 178 ), PoolIntArray( 178, 176, 179 ), PoolIntArray( 182, 186, 183 ), PoolIntArray( 183, 186, 185 ), PoolIntArray( 183, 185, 184 ), PoolIntArray( 184, 185, 180 ), PoolIntArray( 180, 185, 181 ), PoolIntArray( 198, 190, 189 ), PoolIntArray( 190, 199, 191 ), PoolIntArray( 191, 193, 192 ), PoolIntArray( 192, 193, 187 ), PoolIntArray( 193, 191, 194 ), PoolIntArray( 194, 199, 195 ), PoolIntArray( 195, 197, 196 ), PoolIntArray( 196, 197, 188 ), PoolIntArray( 197, 195, 198 ), PoolIntArray( 198, 199, 190 ), PoolIntArray( 199, 194, 191 ), PoolIntArray( 199, 198, 195 ), PoolIntArray( 213, 215, 203 ), PoolIntArray( 203, 215, 204 ), PoolIntArray( 204, 215, 205 ), PoolIntArray( 205, 216, 200 ), PoolIntArray( 200, 216, 206 ), PoolIntArray( 206, 216, 207 ), PoolIntArray( 207, 214, 208 ), PoolIntArray( 208, 209, 201 ), PoolIntArray( 209, 214, 210 ), PoolIntArray( 210, 216, 211 ), PoolIntArray( 211, 215, 212 ), PoolIntArray( 212, 215, 202 ), PoolIntArray( 202, 215, 213 ), PoolIntArray( 215, 216, 205 ), PoolIntArray( 216, 214, 207 ), PoolIntArray( 214, 209, 208 ), PoolIntArray( 214, 216, 210 ), PoolIntArray( 216, 215, 211 ), PoolIntArray( 220, 219, 217 ), PoolIntArray( 217, 219, 218 ), PoolIntArray( 222, 221, 223 ), PoolIntArray( 223, 221, 224 ), PoolIntArray( 228, 227, 225 ), PoolIntArray( 225, 227, 226 ), PoolIntArray( 231, 230, 229 ), PoolIntArray( 233, 232, 235 ), PoolIntArray( 235, 232, 236 ), PoolIntArray( 236, 232, 234 ), PoolIntArray( 238, 237, 239 ), PoolIntArray( 239, 237, 240 ), PoolIntArray( 244, 243, 241 ), PoolIntArray( 241, 243, 242 ), PoolIntArray( 246, 245, 247 ), PoolIntArray( 247, 245, 248 ), PoolIntArray( 252, 251, 249 ), PoolIntArray( 249, 251, 250 ), PoolIntArray( 256, 255, 253 ), PoolIntArray( 253, 255, 254 ), PoolIntArray( 260, 259, 257 ), PoolIntArray( 257, 259, 258 ), PoolIntArray( 262, 261, 263 ), PoolIntArray( 263, 261, 264 ), PoolIntArray( 268, 267, 265 ), PoolIntArray( 265, 267, 266 ) ]
+sample_partition_type = 1
+agent_max_climb = 1.0
+region_min_size = 50.0
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.160784, 0.14902, 0.14902, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 2, 8, 8 )
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 2, 2, 8 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 2, 8, 4 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 2, 8, 2 )
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 8, 8, 8 )
+
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 2, 8, 8 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.0509804, 0.0509804, 0.0509804, 1 )
+
+[sub_resource type="QuadMesh" id=4]
+size = Vector2( 50, 50 )
+
+[sub_resource type="Shader" id=15]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec4 outline_col : hint_color =  vec4(0.0, 0.0, 0.0, 1.0);
+uniform float cutoff = 0.5;
+uniform float highlight_amount = 1.0;
+uniform float thickness = 1.0;
+
+// Sample points
+const vec2 sobelSamplePoints[9] = {
+	vec2(-1.0, 1.0), vec2(0.0, 1.0), vec2(1.0, 1.0),
+	vec2(-1.0, 0.0), vec2(0.0, 0.0), vec2(1.0, 1.0),
+	vec2(-1.0, -1.0), vec2(0.0, -1.0), vec2(1.0, -1.0)
+	};
+
+// X weights
+const float sobelXMatrix[9] = float[9] (
+	1.0, 0.0, -1.0,
+	2.0, 0.0, -2.0,
+	1.0, 0.0, -1.0
+	);
+
+const float scharrX[9] = float[9] (
+	47.0, 0.0, -47.0,
+	162.0, 0.0, -162.0,
+	47.0, 0.0, -47.0
+	);
+
+const float Sobel_FeldmanX[9] = float[9] (
+	3.0, 0.0, -3.0,
+	10.0, 0.0, -10.0,
+	3.0, 0.0, -3.0
+	);
+
+const float PrewittX[9] = float[9] (
+	1.0, 0.0, -1.0,
+	1.0, 0.0, -1.0,
+	1.0, 0.0, -1.0
+	);
+
+// Y weights
+const float sobelYMatrix[9] = float[9] (
+	1.0, 2.0, 1.0,
+	0.0, 0.0, 0.0,
+	-1.0, -2.0, -1.0
+	);
+
+const float scharrY[9] = float[9] (
+	47.0, 162.0, 47.0,
+	0.0, 0.0, 0.0,
+	-47.0, -162.0, -47.0
+	);
+
+const float Sobel_FeldmanY[9] = float[9] (
+	3.0, 10.0, 3.0,
+	0.0, 0.0, 0.0,
+	-3.0, -10.0, -3.0
+	);
+
+const float PrewittY[9] = float[9] (
+	1.0, 1.0, 1.0,
+	0.0, 0.0, 0.0,
+	-1.0, -1.0, -1.0
+	);
+
+
+void vertex() {
+	// Posiiton quad to always cover the screen
+	POSITION = vec4(VERTEX, 1.0);
+}
+
+void fragment(){
+	vec2 sobel = vec2(0.0, 0.0);
+	
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).x;
+	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	float linear_depth = -view.z;
+	
+
+	for (int i = 0; i < 9; i++){
+		vec2 kernel = vec2(scharrX[i], scharrY[i]); // use preffered kernel
+		
+		float t_depth = texture(DEPTH_TEXTURE, SCREEN_UV + sobelSamplePoints[i] * float(thickness) / VIEWPORT_SIZE).x;
+		vec3 t_ndc = vec3(SCREEN_UV, t_depth) * 2.0 - 1.0;
+		vec4 t_view = INV_PROJECTION_MATRIX * vec4(t_ndc, 1.0);
+		t_view.xyz /= t_view.w;
+		float t_linear_depth = -t_view.z;
+		
+		
+		float diff = t_linear_depth - linear_depth;
+		diff *= step(diff, 0.0);
+		float d = t_linear_depth - diff;
+		
+		sobel += d * kernel;
+	}
+
+	float sobel_value = length(sobel);
+	sobel_value = smoothstep(cutoff * 5.0, cutoff, sobel_value);
+	
+	ALBEDO = texture(SCREEN_TEXTURE, SCREEN_UV).rgb * highlight_amount;
+	ALPHA = clamp(1.0 - sobel_value, 0.0, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
+shader_param/outline_col = Color( 0, 0, 0, 1 )
+shader_param/cutoff = 200.0
+shader_param/highlight_amount = 1.5
+shader_param/thickness = 3.0
+
+[sub_resource type="QuadMesh" id=17]
+size = Vector2( 2, 2 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.596078, 0.545098, 0.545098, 1 )
+albedo_texture = ExtResource( 3 )
+metallic_specular = 0.35
+roughness_texture = ExtResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 0.0784314, 0.0705882, 0.0705882, 1 )
+
+[sub_resource type="SpatialMaterial" id=19]
+albedo_color = Color( 0.356863, 0.156863, 0.156863, 1 )
+
+[sub_resource type="CapsuleMesh" id=14]
+radius = 0.5
+
+[node name="Game" type="Node"]
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Level/WorldEnvironment"]
+transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0 )
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="mockup" type="NavigationMeshInstance" parent="Level"]
+navmesh = SubResource( 12 )
+
+[node name="Cube" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 4, 7 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube3" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -1 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube5" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 7, -1 )
+material_override = SubResource( 5 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+
+[node name="Cube4" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 4, -14 )
+material_override = SubResource( 5 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../../..")
+
+[node name="Cube38" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -7 )
+material_override = SubResource( 5 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../../..")
+
+[node name="Cube37" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -17 )
+material_override = SubResource( 5 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../../..")
+
+[node name="Cube28" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 4, -6 )
+material_override = SubResource( 5 )
+mesh = SubResource( 11 )
+skeleton = NodePath("../../..")
+
+[node name="Cube6" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -14 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube8" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -22 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube7" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -14 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube33" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube34" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 7 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube35" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -1 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube36" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -6 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube22" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, -15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube10" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15, 4, -20 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube23" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube11" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22, 4, -15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube26" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 4, -15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube27" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 4, -15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube12" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube29" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 4, 18 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube30" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 4, 18 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube31" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 4, 18 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube32" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 4, -9 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube21" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube24" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube25" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -23, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube13" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19, 4, -25 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube9" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -22 )
+material_override = SubResource( 5 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../../..")
+
+[node name="Cube2" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 4, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+
+[node name="Cube14" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube15" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube16" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube17" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube18" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube19" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Cube20" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -3, 15 )
+material_override = SubResource( 5 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../../..")
+
+[node name="Floor" type="MeshInstance" parent="Level/mockup"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+material_override = SubResource( 9 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+
+[node name="Cam_Pivot" type="Spatial" parent="Level"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0 )
+
+[node name="Cam_Pitch" type="Spatial" parent="Level/Cam_Pivot"]
+transform = Transform( 1, 0, 0, 0, 0.573577, 0.819152, 0, -0.819152, 0.573577, 0, 0, 0 )
+
+[node name="Cam_Stick" type="Spatial" parent="Level/Cam_Pivot/Cam_Pitch"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15 )
+
+[node name="Camera" type="Camera" parent="Level/Cam_Pivot/Cam_Pitch/Cam_Stick"]
+
+[node name="PostProcessingQuad" type="MeshInstance" parent="Level/Cam_Pivot/Cam_Pitch/Cam_Stick/Camera"]
+material_override = SubResource( 16 )
+mesh = SubResource( 17 )
+
+[node name="floor" type="MeshInstance" parent="Level"]
+visible = false
+material_override = SubResource( 13 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../..")
+
+[node name="chunk" type="MeshInstance" parent="Level"]
+visible = false
+material_override = SubResource( 20 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("../..")
+
+[node name="Entity" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
+material_override = SubResource( 19 )
+mesh = SubResource( 14 )
+
+[node name="MonitorOverlay" type="VBoxContainer" parent="."]
+margin_right = 159.0
+margin_bottom = 242.0
+script = ExtResource( 1 )
+process = true
+nodes = true
+orphan_nodes = true
+vertices_drawn = true
+draw_calls_3d = true
