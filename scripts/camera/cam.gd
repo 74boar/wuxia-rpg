@@ -4,8 +4,8 @@ func _ready():
 	Utils._level_camera = self
 
 
-func _process(delta):
-	update_cameras()
+#func _process(delta):
+#	update_cameras()
 
 
 func update_cameras():
