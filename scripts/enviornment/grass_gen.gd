@@ -6,6 +6,39 @@ var mdt
 var verts = []
 var points = []
 
+func _ready():
+	var mm = multimesh
+	var num_instances = multimesh.instance_count
+	#iterate over all grass instances
+	for i in num_instances:
+		var i_xform : Transform = multimesh.get_instance_transform(i)
+		var pos = i_xform.origin + global_transform.origin
+		var atlas_code = get_atlas_code()
+		
+		#set instance custom data
+		multimesh.set_instance_custom_data(i,Color(
+			pos.x,
+			pos.y,
+			pos.z,
+			atlas_code
+		))
+	
+	#set viewport texture
+	var env_viewport : Viewport = get_node("/root/Game/env_ViewportContainer/Viewport")
+	material_override.set_shader_param("texture_viewport", env_viewport.get_texture())
+
+
+
+func get_atlas_code():
+	var x_range = [0, 1, 2]
+	var y_range = [0]
+	
+	var x : float = Utils._rng.randi_range(0, x_range.size()-1)
+	var y : float = Utils._rng.randi_range(0, y_range.size()-1)
+	var code : float = x + (y / 10.0)
+	return code
+
+
 #func _ready():
 #	yield(owner, "ready")
 #	mdt = MeshDataTool.new()
