@@ -1,13 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/monitor_overlay/monitor_overlay.gd" type="Script" id=1]
-[ext_resource path="res://resources/import3D/terrain/rocks/rock_1.obj" type="ArrayMesh" id=5]
-[ext_resource path="res://resources/lightmaps/Test_Scene.lmbake" type="BakedLightmapData" id=6]
-[ext_resource path="res://resources/import3D/terrain/grass/grass_card.obj" type="ArrayMesh" id=7]
-[ext_resource path="res://resources/materials/Rock.material" type="Material" id=9]
+[ext_resource path="res://scenes/levels/Scene_Test_2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/camera/cam.gd" type="Script" id=10]
-[ext_resource path="res://resources/materials/Grass.material" type="Material" id=11]
-[ext_resource path="res://scenes/levels/Scene_Test.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/camera/cam-move.gd" type="Script" id=13]
 
 [sub_resource type="ProceduralSky" id=2]
@@ -17,14 +12,16 @@ sky_top_color = Color( 0.603922, 0.74902, 0.831373, 1 )
 background_mode = 2
 background_sky = SubResource( 2 )
 ambient_light_sky_contribution = 0.5
+fog_enabled = true
+fog_color = Color( 0.47451, 0.662745, 0.611765, 1 )
+fog_depth_begin = 15.0
+fog_depth_curve = 1.07177
 tonemap_mode = 2
 tonemap_white = 6.0
 ssao_enabled = true
 ssao_intensity = 2.0
-dof_blur_far_distance = 11.16
 dof_blur_far_transition = 30.0
 dof_blur_far_quality = 0
-glow_blend_mode = 0
 adjustment_enabled = true
 adjustment_saturation = 1.1
 
@@ -149,60 +146,13 @@ void fragment(){
 shader = SubResource( 15 )
 shader_param/outline_col = Color( 0, 0, 0, 1 )
 shader_param/cutoff = 200.0
-shader_param/highlight_amount = 1.6
+shader_param/highlight_amount = 1.8
 shader_param/thickness = 3.0
 
 [sub_resource type="QuadMesh" id=17]
 size = Vector2( 2, 2 )
 
 [sub_resource type="SphereShape" id=25]
-
-[sub_resource type="Shader" id=26]
-code = "// NOTE: Shader automatically converted from Godot Engine 3.5.1.stable's SpatialMaterial.
-
-shader_type spatial;
-render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
-uniform vec4 albedo : hint_color;
-uniform sampler2D texture_albedo : hint_albedo;
-uniform float specular;
-uniform float metallic;
-uniform float roughness : hint_range(0,1);
-uniform float point_size : hint_range(0,128);
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-
-void vertex() {
-	UV=UV*uv1_scale.xy+uv1_offset.xy;
-}
-
-
-
-
-void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	albedo_tex.rgb = mix(pow((albedo_tex.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)),vec3(2.4)),albedo_tex.rgb.rgb * (1.0 / 12.92),lessThan(albedo_tex.rgb,vec3(0.04045)));
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	SPECULAR = specular;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=27]
-shader = SubResource( 26 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
 
 [node name="Game" type="Node"]
 
@@ -211,18 +161,21 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
-stretch_shrink = 4
+stretch_shrink = 2
 
 [node name="Viewport" type="Viewport" parent="env_ViewportContainer"]
-size = Vector2( 480, 270 )
+size = Vector2( 960, 540 )
 transparent_bg = true
 handle_input_locally = false
+fxaa = true
+sharpen_intensity = 0.5
 keep_3d_linear = true
 render_target_update_mode = 3
 shadow_atlas_size = 4096
 
 [node name="env_Camera" type="Camera" parent="env_ViewportContainer/Viewport" groups=["copy_cams"]]
 cull_mask = 2
+far = 40.0
 
 [node name="Level" type="Spatial" parent="."]
 
@@ -230,13 +183,16 @@ cull_mask = 2
 environment = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Level/WorldEnvironment"]
-transform = Transform( -0.954496, -0.210877, 0.210877, 0, 0.707107, 0.707107, -0.298225, 0.67493, -0.67493, 0, 0, 0 )
-layers = 3
+transform = Transform( -0.954496, -0.210877, 0.210877, 0, 0.707107, 0.707107, -0.298225, 0.67493, -0.674931, 0, 0, 0 )
 light_energy = 3.0
 shadow_enabled = true
+shadow_color = Color( 0.00784314, 0.152941, 0.254902, 1 )
+directional_shadow_mode = 0
+
+[node name="Test_Level" parent="Level" instance=ExtResource( 2 )]
 
 [node name="Entity" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.28052, 0.579829, -0.342581 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.59771, 1.74013, -0.130647 )
 material_override = SubResource( 19 )
 generate_lightmap = false
 mesh = SubResource( 14 )
@@ -244,104 +200,6 @@ mesh = SubResource( 14 )
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Level"]
 visible = false
 navmesh = SubResource( 22 )
-
-[node name="grass_card_t" type="MeshInstance" parent="Level"]
-transform = Transform( 0.464973, -0.0841479, -0.881317, 0.0399506, 0.996453, -0.0740642, 0.884423, -0.000771165, 0.466685, 6.74338, 1.02636, -3.05005 )
-material_override = ExtResource( 11 )
-mesh = ExtResource( 7 )
-skeleton = NodePath("../WorldEnvironment/DirectionalLight")
-
-[node name="rock_1" type="MeshInstance" parent="Level"]
-transform = Transform( 0.681987, 0, 0, 0, 1, 0, 0, 0, 0.681729, 7.995, 0.627314, -1.06215 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_12" type="MeshInstance" parent="Level"]
-transform = Transform( -0.0701144, -0.141438, -0.646589, -0.112843, 0.809484, 0.0364728, 0.652327, -0.00452293, -0.0149701, 11.0063, 1.28969, 3.1771 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_9" type="MeshInstance" parent="Level"]
-transform = Transform( -1.19913, -0.351711, 0, 0.440586, -0.915441, 0.202309, -0.0941478, 0.195619, 0.946751, 7.995, -1.17707, 1.00603 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_11" type="MeshInstance" parent="Level"]
-transform = Transform( 0.108032, 0.377345, 0.154537, -0.336492, 0.195507, -0.0317467, -0.183013, -0.348324, 0.149594, 7.79316, 1.12062, 2.24972 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_6" type="MeshInstance" parent="Level"]
-transform = Transform( -0.0253849, -0.314858, -0.160289, 0.165382, 0.209796, -0.152569, 0.221228, -0.192965, 0.0956636, 5.66189, 0.122715, -1.81749 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_7" type="MeshInstance" parent="Level"]
-transform = Transform( 0.227955, -0.28067, -0.118435, 0.1787, 0.360339, 0.00557198, 0.203451, -0.0843681, 0.242001, 9.20274, 2.0636, 0.0957189 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_10" type="MeshInstance" parent="Level"]
-transform = Transform( 0.0249746, -0.00520863, -0.253351, -0.168544, -0.38354, -0.0731571, -0.310256, 0.26193, -0.0555356, 8.42201, 2.40868, -0.718008 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_8" type="MeshInstance" parent="Level"]
-transform = Transform( -0.183221, 0.266087, 0.153737, 0.031142, 0.370877, -0.0550252, -0.154647, -0.131194, -0.168841, 9.49207, 1.46899, 1.3131 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_2" type="MeshInstance" parent="Level"]
-transform = Transform( -0.999621, 0, -0.0275378, 0.0167606, 0.793449, -0.608406, 0.0218499, -0.608637, -0.793148, 8.8232, 1.22929, -5.10781 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_3" type="MeshInstance" parent="Level"]
-transform = Transform( 0.138188, -0.976812, -0.16353, -0.0299945, -0.169166, 0.985131, -0.989952, -0.131228, -0.0526756, 11.3026, 1.72079, -0.827529 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_4" type="MeshInstance" parent="Level"]
-transform = Transform( 0.854475, 0.132418, -0.502332, -0.184884, 0.981172, -0.0558462, 0.48548, 0.140592, 0.862869, 12.3408, -0.0840039, 0.0919361 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="rock_5" type="MeshInstance" parent="Level"]
-transform = Transform( -0.778521, -0.279987, -0.28613, -0.333852, 0.761511, 0.178406, 0.0914855, 0.243936, -0.569608, 5.24344, -0.402975, -3.18787 )
-material_override = ExtResource( 9 )
-use_in_baked_light = true
-mesh = ExtResource( 5 )
-skeleton = NodePath("../..")
-
-[node name="BakedLightmap" type="BakedLightmap" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.76016, 0, 0 )
-visible = false
-extents = Vector3( 14.1585, 10, 12.8287 )
-environment_mode = 1
-environment_min_light = Color( 0.301961, 0.321569, 0.333333, 1 )
-light_data = ExtResource( 6 )
 
 [node name="Cam_Move" type="KinematicBody" parent="Level"]
 script = ExtResource( 13 )
@@ -357,6 +215,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15 )
 
 [node name="LevelCamera" type="Camera" parent="Level/Cam_Move/Cam_Pivot/Cam_Pitch/Cam_Stick"]
 cull_mask = 1
+far = 40.0
 script = ExtResource( 10 )
 
 [node name="PostProcessingQuad" type="MeshInstance" parent="Level/Cam_Move/Cam_Pivot/Cam_Pitch/Cam_Stick/LevelCamera"]
@@ -371,12 +230,6 @@ shape = SubResource( 25 )
 [node name="Pivot_Tween" type="Tween" parent="Level/Cam_Move"]
 
 [node name="Zoom_Tween" type="Tween" parent="Level/Cam_Move"]
-
-[node name="test_scene" parent="Level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1617, -0.989239, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Level"]
-material_override = SubResource( 27 )
 
 [node name="MonitorOverlay" type="VBoxContainer" parent="."]
 margin_right = 159.0

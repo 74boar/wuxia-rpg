@@ -1,35 +1,118 @@
 extends MultiMeshInstance
 
-export var bounds_mesh : Mesh
+export var point_mesh : Mesh
 
 var mdt
 var verts = []
 var points = []
+var norms = []
+var cross = []
 
 func _ready():
-	var mm = multimesh
-	var num_instances = multimesh.instance_count
-	#iterate over all grass instances
-	for i in num_instances:
-		var i_xform : Transform = multimesh.get_instance_transform(i)
-		var pos = i_xform.origin + global_transform.origin
-		var atlas_code = get_atlas_code()
-		
-		#set instance custom data
-		multimesh.set_instance_custom_data(i,Color(
-			pos.x,
-			pos.y,
-			pos.z,
-			atlas_code
-		))
+	generate_grass()
+#	var mm = multimesh
+#	var num_instances = multimesh.instance_count
+#	var proxy = get_node("grass_card_proxy")
+#	var p1 = proxy.get_node("P1")
+#	var p2 = proxy.get_node("P2")
+#
+#
+#	#iterate over all grass instances
+#	for i in num_instances:
+#		var i_xform : Transform = multimesh.get_instance_transform(i)
+#		var pos = i_xform.origin + global_transform.origin
+#		var atlas_code = get_atlas_code()
+#
+#		#set proxy transform to instance transform
+#		proxy.transform = i_xform
+#		var p1_pos = p1.global_transform.origin
+#		var p2_pos = p2.global_transform.origin
+#
+#		#set instance custom data
+#		multimesh.set_instance_custom_data(i,Color(
+#			p1_pos.x,
+#			p1_pos.y,
+#			p1_pos.z,
+#			atlas_code
+#		))
+#
+#		#test lerping b/w card endpoints
+#		multimesh.set_instance_color(i,Color(
+#			p2_pos.x,
+#			p2_pos.y,
+#			p2_pos.z,
+#			1.0
+#		))
 	
 	#set viewport texture
 	var env_viewport : Viewport = get_node("/root/Game/env_ViewportContainer/Viewport")
 	material_override.set_shader_param("texture_viewport", env_viewport.get_texture())
 
 
+func generate_grass():
+	mdt = MeshDataTool.new()
+	mdt.create_from_surface(point_mesh, 0)
+	
+	#set number of instances to draw
+	multimesh.instance_count = mdt.get_face_count()
+	
+	var proxy = get_node("grass_card_proxy")
+	var p1 = proxy.get_node("P1")
+	var p2 = proxy.get_node("P2")
+	var p3 = proxy.get_node("P3")
+	var p4 = proxy.get_node("P4")
+	
+	#for each vertex...
+	for i in multimesh.instance_count:
+		var face_normal : Vector3 = mdt.get_face_normal(i)
+		var a : int = mdt.get_face_vertex(i, 0)
+		var b : int = mdt.get_face_vertex(i, 1)
+		var c : int = mdt.get_face_vertex(i, 2)
+		var ap : Vector3 = mdt.get_vertex(a)
+		var bp : Vector3 = mdt.get_vertex(b)
+		var cp : Vector3 = mdt.get_vertex(c)
+		var center : Vector3 = lerp(lerp(ap, bp, 0.5), cp, 0.5)
+		var atlas_code : float = get_atlas_code()
+		
+		#set proxy transform to instance transform
+		#calculate flat
+		proxy.look_at_from_position(center, center + face_normal, Vector3.UP)
+		var p1_pos = p1.global_transform.origin
+		var p2_pos = p2.global_transform.origin
+		var p3_pos = p3.global_transform.origin
+		var p4_pos = p4.global_transform.origin
+		var t = lerp(p3_pos, p4_pos, 0.5)
+		cross.append(t)
+		
+		#recalculate "standing up"
+		proxy.look_at_from_position(center, t, Vector3.UP)
+		p1_pos = p1.global_transform.origin
+		p2_pos = p2.global_transform.origin
+		
+		#debug
+		points.append(center)
+		norms.append(center + face_normal)
+		
+		#set instance custom data
+		multimesh.set_instance_custom_data(i,Color(
+			p1_pos.x,
+			p1_pos.y,
+			p1_pos.z,
+			atlas_code
+		))
 
-func get_atlas_code():
+		#test lerping b/w card endpoints
+		multimesh.set_instance_color(i,Color(
+			p2_pos.x,
+			p2_pos.y,
+			p2_pos.z,
+			1.0
+		))
+		
+		multimesh.set_instance_transform(i,proxy.transform)
+
+
+func get_atlas_code() -> float:
 	var x_range = [0, 1, 2]
 	var y_range = [0]
 	
@@ -48,9 +131,14 @@ func get_atlas_code():
 #	addGrass()
 
 
-#func _process(delta):
-#	for p in points:
-#		DebugDraw.draw_cube(global_transform.xform(p), 0.2)
+func _process(delta):
+	for i in points.size():
+		var p = points[i]
+		var n = norms[i]
+		var c = cross[i]
+		#DebugDraw.draw_cube(p, 0.2)
+		DebugDraw.draw_line_3d(p, n, Color.red)
+		DebugDraw.draw_line_3d(p, c, Color.green)
 
 
 ##Grass displacement

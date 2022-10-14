@@ -22,7 +22,7 @@ var pivot_time = 0.5
 var zoom_time = 0.15
 var rotate_magnitude = 1
 
-var min_zoom = 10
+var min_zoom = 0
 var max_zoom = 20
 
 var follow_target = null setget set_follow_target
