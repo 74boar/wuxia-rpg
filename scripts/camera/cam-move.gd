@@ -10,7 +10,7 @@ onready var _cam = find_node("LevelCamera")
 
 var velocity = Vector3()
 var friction = 0.05
-var move_speed = 25
+var move_speed = 15
 var snap_speed = 30
 var zoom_speed = 5
 
