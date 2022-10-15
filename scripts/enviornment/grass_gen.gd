@@ -8,6 +8,10 @@ var points = []
 var norms = []
 var cross = []
 
+#generation
+export var scale_min := 0.8
+export var scale_max := 1.2
+
 func _ready():
 	generate_grass()
 #	var mm = multimesh
@@ -74,15 +78,22 @@ func generate_grass():
 		var center : Vector3 = lerp(lerp(ap, bp, 0.5), cp, 0.5)
 		var atlas_code : float = get_atlas_code()
 		
+		#randomize scale
+		var x_scale = Utils._rng.randf_range(scale_min, scale_max)
+		var y_scale = Utils._rng.randf_range(scale_min, scale_max)
+		var scale_vec = Vector3(x_scale, y_scale, 1)
+		proxy.scale = scale_vec
+		
 		#set proxy transform to instance transform
 		#calculate flat
-		proxy.look_at_from_position(center, center + face_normal, Vector3.UP)
+		if face_normal != Vector3.UP:
+			proxy.look_at_from_position(center, center + face_normal, Vector3.UP)
 		var p1_pos = p1.global_transform.origin
 		var p2_pos = p2.global_transform.origin
 		var p3_pos = p3.global_transform.origin
 		var p4_pos = p4.global_transform.origin
 		var t = lerp(p3_pos, p4_pos, 0.5)
-		cross.append(t)
+		
 		
 		#recalculate "standing up"
 		proxy.look_at_from_position(center, t, Vector3.UP)
@@ -90,8 +101,9 @@ func generate_grass():
 		p2_pos = p2.global_transform.origin
 		
 		#debug
-		points.append(center)
-		norms.append(center + face_normal)
+#		points.append(center)
+#		norms.append(center + face_normal)\
+#		cross.append(t)
 		
 		#set instance custom data
 		multimesh.set_instance_custom_data(i,Color(
@@ -131,14 +143,15 @@ func get_atlas_code() -> float:
 #	addGrass()
 
 
-func _process(delta):
-	for i in points.size():
-		var p = points[i]
-		var n = norms[i]
-		var c = cross[i]
-		#DebugDraw.draw_cube(p, 0.2)
-		DebugDraw.draw_line_3d(p, n, Color.red)
-		DebugDraw.draw_line_3d(p, c, Color.green)
+#DEBUG
+#func _process(delta):
+#	for i in points.size():
+#		var p = points[i]
+#		var n = norms[i]
+#		var c = cross[i]
+#		#DebugDraw.draw_cube(p, 0.2)
+#		DebugDraw.draw_line_3d(p, n, Color.red)
+#		DebugDraw.draw_line_3d(p, c, Color.green)
 
 
 ##Grass displacement
