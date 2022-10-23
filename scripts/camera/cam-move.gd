@@ -10,9 +10,10 @@ onready var _cam = find_node("LevelCamera")
 
 var velocity = Vector3()
 var friction = 0.05
-var move_speed = 15
+var move_speed = 18
 var snap_speed = 30
 var zoom_speed = 5
+var rotate_speed = 1.125
 
 var default_pitch = -60
 var topdown_pitch = -90
@@ -20,7 +21,7 @@ var is_topdown = false
 var pitch_time = 0.2
 var pivot_time = 0.5
 var zoom_time = 0.15
-var rotate_magnitude = 1
+
 
 var min_zoom = 0
 var max_zoom = 20
@@ -39,9 +40,9 @@ func get_input() -> Vector3:
 	var input_dir = Vector3()
 	# Cam rotation
 	if Input.is_action_pressed("rotate_left") and !_pivot_tween.is_active():
-		set_cam_rotate(_pivot.rotation_degrees.y + rotate_magnitude)
+		set_cam_rotate(_pivot.rotation_degrees.y + rotate_speed)
 	if Input.is_action_pressed("rotate_right") and !_pivot_tween.is_active():
-		set_cam_rotate(_pivot.rotation_degrees.y - rotate_magnitude)
+		set_cam_rotate(_pivot.rotation_degrees.y - rotate_speed)
 	#Cam Zoom
 	if Input.is_action_just_released("zoom_in"):
 		var current_zoom = _stick.transform.origin.z

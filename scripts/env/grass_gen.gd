@@ -50,7 +50,11 @@ func _ready():
 	
 	#set viewport texture
 	var env_viewport : Viewport = get_node("/root/Game/env_ViewportContainer/Viewport")
-	material_override.set_shader_param("texture_viewport", env_viewport.get_texture())
+	var t : Texture = env_viewport.get_texture()
+	#t.flags = Texture.FLAG_VIDEO_SURFACE 
+	t.flags = Texture.FLAG_FILTER  
+	print(t.flags)
+	material_override.set_shader_param("texture_viewport", t)
 
 
 func generate_grass():
@@ -97,6 +101,7 @@ func generate_grass():
 		
 		#recalculate "standing up"
 		proxy.look_at_from_position(center, t, Vector3.UP)
+		proxy.rotate_y(Utils._rng.randi_range(0, 180))
 		p1_pos = p1.global_transform.origin
 		p2_pos = p2.global_transform.origin
 		
@@ -112,13 +117,13 @@ func generate_grass():
 			p1_pos.z,
 			atlas_code
 		))
-
+		
 		#test lerping b/w card endpoints
 		multimesh.set_instance_color(i,Color(
-			p2_pos.x,
+			Utils._rng.randi_range(0, 1),
 			p2_pos.y,
 			p2_pos.z,
-			1.0
+			Utils._rng.randf_range(0.0, 0.6)
 		))
 		
 		multimesh.set_instance_transform(i,proxy.transform)
