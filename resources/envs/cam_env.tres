@@ -1,9 +1,9 @@
 [gd_resource type="Environment" load_steps=2 format=2]
 
-[sub_resource type="ProceduralSky" id=31]
+[ext_resource path="res://resources/envs/sky/Grassland_Morning.tres" type="ProceduralSky" id=1]
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 31 )
-background_energy = 0.75
+background_sky = ExtResource( 1 )
 fog_depth_enabled = false
+fog_depth_begin = 15.0

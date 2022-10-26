@@ -106,13 +106,15 @@ func generate_grass():
 		p2_pos = p2.global_transform.origin
 		
 		#debug
-#		points.append(center)
-#		norms.append(center + face_normal)\
-#		cross.append(t)
+		points.append(center)
+		norms.append(center + face_normal)
+		#cross.append(t)
+		
+		var norm = face_normal# + center
 		
 		#set instance custom data
 		multimesh.set_instance_custom_data(i,Color(
-			p1_pos.x,
+			Utils._rng.randi_range(0, 1),
 			p1_pos.y,
 			p1_pos.z,
 			atlas_code
@@ -120,9 +122,9 @@ func generate_grass():
 		
 		#test lerping b/w card endpoints
 		multimesh.set_instance_color(i,Color(
-			Utils._rng.randi_range(0, 1),
-			p2_pos.y,
-			p2_pos.z,
+			norm.x,
+			norm.y,
+			norm.z,
 			Utils._rng.randf_range(0.0, 0.6)
 		))
 		

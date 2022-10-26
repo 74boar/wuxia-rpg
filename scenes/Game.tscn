@@ -1,43 +1,52 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://addons/monitor_overlay/monitor_overlay.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/Scene_Test_2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/import3D/terrain/foliage/bush.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://resources/materials/Foliage.material" type="Material" id=4]
-[ext_resource path="res://resources/envs/cam_env.tres" type="Environment" id=5]
+[ext_resource path="res://resources/import3D/terrain/tree/tree_1.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://resources/textures/terrain/Terrain_Rock_TM_2.png" type="Texture" id=6]
+[ext_resource path="res://resources/textures/terrain/Terrain_Rock_NM_2.png" type="Texture" id=7]
+[ext_resource path="res://resources/import3D/terrain/foliage/plants.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://resources/textures/foliage/Foliage_TM_1.png" type="Texture" id=9]
 [ext_resource path="res://scripts/camera/cam.gd" type="Script" id=10]
+[ext_resource path="res://resources/envs/sky/Grassland_Morning.tres" type="ProceduralSky" id=11]
+[ext_resource path="res://resources/textures/tree/Tree_1_NM.bmp" type="Texture" id=12]
 [ext_resource path="res://scripts/camera/cam-move.gd" type="Script" id=13]
+[ext_resource path="res://resources/import3D/terrain/tree/tree_1_leaves_blob.obj" type="ArrayMesh" id=14]
+[ext_resource path="res://resources/import3D/terrain/tree/tree_1_leaves_cards.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://resources/materials/Bush.material" type="Material" id=16]
 
-[sub_resource type="ProceduralSky" id=2]
-sky_top_color = Color( 0.603922, 0.74902, 0.831373, 1 )
+[sub_resource type="Environment" id=36]
+background_mode = 2
+background_sky = ExtResource( 11 )
+fog_depth_begin = 15.0
 
 [sub_resource type="Environment" id=3]
 background_mode = 2
-background_sky = SubResource( 2 )
-ambient_light_color = Color( 0.819608, 0.819608, 0.819608, 1 )
-ambient_light_sky_contribution = 0.0
-fog_color = Color( 1, 1, 1, 1 )
+background_sky = ExtResource( 11 )
+fog_enabled = true
 fog_depth_begin = 15.0
 tonemap_mode = 2
-tonemap_exposure = 1.15
-tonemap_white = 6.0
+tonemap_exposure = 1.2
+tonemap_white = 3.0
 ssao_enabled = true
-ssao_intensity = 1.3
-ssao_light_affect = 0.61
 ssao_blur = 2
 dof_blur_far_transition = 35.0
 adjustment_enabled = true
+adjustment_brightness = 1.1
 adjustment_saturation = 1.1
 
 [sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 0.356863, 0.156863, 0.156863, 1 )
 
 [sub_resource type="CapsuleMesh" id=14]
-radius = 0.5
+radius = 0.7
+mid_height = 2.0
 
 [sub_resource type="CapsuleMesh" id=26]
-radius = 0.2
-mid_height = 0.3
+radius = 0.3
+mid_height = 0.35
 
 [sub_resource type="NavigationMesh" id=22]
 vertices = PoolVector3Array( 19.5, 0.314982, -9.25, 19.5, 0.314982, -19.5, 9.75, 0.314982, -19.5, 9.5, 0.314982, -9.25, 7.75, 0.314982, -9.25, 0, 0.314982, -19.5, -9.75, 0.314982, -19.5, -19.5, 0.314982, -9.25, 7.75, 0.314982, -9.25, 9.5, 0.314982, -9.25, 9.75, 0.314982, -19.5, 0, 0.314982, -19.5, -9.75, 0.314982, -19.5, -19.5, 0.314982, -19.5, -19.5, 0.314982, -9.25, 3.25, 0.314982, -6.5, 5, 0.314982, -6.5, 5.5, 0.314982, -8, -19.5, 0.314982, -9.25, -19.5, 0.314982, -3, 2.25, 0.314982, -3, 2.25, 0.314982, -5.75, -19.5, 0.314982, -9.25, -19.5, 0.314982, -3, 2.25, 0.314982, -5.75, 3.25, 0.314982, -6.5, 5.5, 0.314982, -8, 7.75, 0.314982, -9.25, -19.5, 0.314982, -9.25, 13.25, 0.564982, -4, 13.75, 1.31498, -2, 14.75, 1.06498, -2, 14, 1.06498, -3, 12.25, 0.314982, -6.75, 12, 0.314982, -4.5, 13.25, 0.564982, -4, 13.25, 0.564982, -4, 14.75, 1.06498, -2, 15.75, 0.314982, -2, 14.9167, 0.814982, -2.66667, 14, 1.06498, -3, 12.25, 0.314982, -6.75, 13.25, 0.564982, -4, 15.75, 0.314982, -2, 19.5, 0.314982, -2, 19.5, 0.314982, -9.25, 14.9167, 0.814982, -2.66667, 19.5, 0.314982, -9.25, 9.5, 0.314982, -9.25, 12.25, 0.314982, -6.75, 9, 2.56498, -7, 9.5, 2.31498, -7.25, 9.25, 1.81498, -8, 7.25, 1.81498, -7.5, 9.5, 3.81498, -3.75, 10.75, 3.31498, -4.5, 9, 3.06498, -6.25, 7.25, 2.81498, -6, 6.5, 2.56498, -5.5, 8, 3.81498, -3.5, 9, 2.56498, -7, 7.25, 1.81498, -7.5, 7.25, 2.81498, -6, 9, 3.06498, -6.25, 10.75, 3.31498, -4.5, 10.25, 3.06498, -6.25, 9, 3.06498, -6.25, 8, 3.81498, -3.5, 8.25, 4.56498, -1.25, 8.75, 4.56498, -1.25, 9.5, 3.81498, -3.75, 9.5, 0.564982, -4.25, 10.25, 0.564982, -4.25, 10.75, 0.564982, -5, 10.75, 0.314982, -5.75, 9.25, 0.314982, -7, 8.75, 0.314982, -5.25, 7.25, 0.314982, -6.5, 6.75, 0.314982, -5.75, 7, 0.314982, -5, 8.75, 0.314982, -5.25, 9.25, 0.314982, -7, 5.25, 1.06498, -2, 5.5, 1.06498, -1.25, 6, 1.56498, -2.5, 4.25, 0.564982, -2, 5.25, 1.06498, -2, 6, 1.56498, -2.5, 4.25, 0.564982, -2, 6, 1.56498, -2.5, 6, 1.81498, -3.75, 4.75, 1.56498, -5.5, 3.25, 1.31498, -3.75, 3.25, 0.814982, -3, 4, 1.81498, -4.625, 4.25, 0.564982, -2, 3.25, 0.814982, -3, 2.25, 0.314982, -3, 2.25, 0.314982, -3, -19.5, 0.314982, -3, -19.5, 0.314982, -2, 4.25, 0.564982, -2, 7.75, 1.56498, -3.75, 8.25, 2.06498, -2.5, 8.75, 1.81498, -3, 8.5, 1.56498, -3.75, 10.25, 6.56498, -1.75, 10.25, 6.56498, -1, 11, 6.81498, -0.75, 11, 6.31498, -2.5, 12.25, 1.56498, -2, 12.25, 1.31498, -2.5, 11.75, 1.31498, -2.5, 10.75, 2.06498, 0.25, 10.75, 2.06498, 0.75, 11.75, 2.06498, 0.5, 12.25, 1.56498, -2, 11.75, 1.31498, -2.5, 11, 2.06498, -1.5, 3.5, 0.314982, 0.25, 4.75, 0.314982, -0.5, 4.25, 0.314982, -0.75, 3.5, 0.314982, 0.25, 4.25, 0.314982, -0.75, 4.25, 0.564982, -2, -19.5, 0.314982, -2, -19.5, 0.314982, 6, 9.5, 0.314982, 6, 6.75, 0.314982, 5.75, 3.5, 0.314982, 0.25, -19.5, 0.314982, -2, -19.5, 0.314982, 6, 3.75, 0.314982, 4.25, -19.5, 0.314982, 6, 6.75, 0.314982, 5.75, 3.75, 0.314982, 4.25, 13.75, 1.81498, 3.75, 14, 1.81498, 3, 13.5, 1.81498, 2.75, 14.75, 0.814982, -1.25, 14.75, 1.06498, -2, 13.75, 1.31498, -2, 14.5, 1.06498, -1, 9.5, 3.31498, 3.25, 8.5, 3.06498, 3.25, 8.5, 2.56498, 4, 13.5, 1.56498, 1.5, 14, 1.31498, 1.25, 14, 1.56498, -0.25, 13.75, 1.31498, -2, 19.5, 0.314982, -2, 15.75, 0.314982, -2, 15.75, 0.314982, -1.25, 13.25, 2.06498, 2.5, 10, 3.31498, 2.25, 9.5, 3.31498, 3.25, 10.75, 3.06498, 3, 11.0833, 3.06498, 2.33333, 13.25, 2.06498, 2.5, 9.5, 3.31498, 3.25, 8.5, 2.56498, 4, 13.75, 1.81498, 3.75, 13.5, 1.81498, 2.75, 10.75, 3.06498, 3, 11.125, 2.81498, 3.875, 15.5, 0.314982, -1, 14.75, 0.314982, 4.5, 19.5, 0.314982, 6, 19.5, 0.314982, -2, 15.75, 0.314982, -1.25, 15.5, 0.314982, -1, 15.75, 0.314982, -1.25, 14.75, 0.814982, -1.25, 14.5, 1.06498, -1, 13.25, 2.06498, 2.5, 13.5, 1.81498, 2.75, 13.5, 1.56498, 1.5, 13.75, 1.31498, -2, 13.25, 2.06498, 2.5, 13.5, 1.56498, 1.5, 14.75, 0.314982, 4.5, 11, 0.314982, 6, 19.5, 0.314982, 6, 13.75, 1.31498, -2, 14, 1.56498, -0.25, 14.5, 1.06498, -1, 11.25, 0.314982, 0, 11.25, 0.314982, 0.5, 11.75, 0.314982, 0.25, 11.75, 0.314982, -0.5, 7.75, 1.31498, 4.75, 7.25, 1.56498, 3.75, 6.75, 1.56498, 3.75, 5.75, 1.56498, 4.25, 5.25, 1.81498, 2.75, 6.75, 2.06498, 2.75, 6.5, 1.81498, 1.5, 5.75, 1.31498, 0.25, 4.5, 1.31498, 1, 4.75, 1.81498, 2.5, 5.25, 1.81498, 2.75, 5, 1.81498, 3.75, 5.75, 1.56498, 4.25, 6.75, 1.56498, 3.75, 6.75, 2.06498, 2.75, 6.75, 2.06498, 2.75, 8.25, 2.81498, 2.75, 8, 2.31498, 1.5, 6.5, 1.81498, 1.5, 19.5, 0.314982, 12.75, 19.5, 0.314982, 6, 11, 0.314982, 6, -19.5, 0.314982, 12.75, -19.5, 0.314982, 19.5, -9.75, 0.314982, 19.5, 9.75, 0.314982, 19.5, 19.5, 0.314982, 19.5, 19.5, 0.314982, 12.75, 19.5, 0.314982, 12.75, 11, 0.314982, 6, 9.5, 0.314982, 6, 0, 0.314982, 19.5, 9.75, 0.314982, 19.5, -19.5, 0.314982, 6, -19.5, 0.314982, 12.75, -9.75, 0.314982, 19.5, 0, 0.314982, 19.5, 9.5, 0.314982, 6 )
@@ -165,8 +174,45 @@ size = Vector2( 2, 2 )
 [sub_resource type="CubeMesh" id=32]
 size = Vector3( 3, 12, 3 )
 
+[sub_resource type="SpatialMaterial" id=33]
+albedo_color = Color( 0.137255, 0.129412, 0.12549, 1 )
+albedo_texture = ExtResource( 6 )
+metallic = 0.27
+metallic_specular = 0.23
+roughness = 0.63
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource( 7 )
+ao_enabled = true
+ao_light_affect = 0.5
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 6, 6, 1 )
+
+[sub_resource type="QuadMesh" id=34]
+size = Vector2( 25, 25 )
+
 [sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=35]
+params_cull_mode = 2
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.8
+albedo_color = Color( 0.129412, 0.12549, 0.0352941, 1 )
+albedo_texture = ExtResource( 9 )
+metallic_specular = 0.2
+ao_enabled = true
+ao_light_affect = 0.0
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=37]
+albedo_color = Color( 0.17, 0.122627, 0.0952, 1 )
+normal_enabled = true
+normal_scale = 1.5
+normal_texture = ExtResource( 12 )
 
 [node name="Game" type="Node"]
 
@@ -174,20 +220,20 @@ bg_color = Color( 0, 0, 0, 1 )
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -631, 2486 )
 mouse_filter = 2
 stretch = true
-stretch_shrink = 4
+stretch_shrink = 8
 
 [node name="Viewport" type="Viewport" parent="env_ViewportContainer"]
-size = Vector2( 480, 270 )
-transparent_bg = true
+size = Vector2( 240, 135 )
 handle_input_locally = false
 keep_3d_linear = true
 render_target_update_mode = 3
 
 [node name="env_Camera" type="Camera" parent="env_ViewportContainer/Viewport" groups=["copy_cams"]]
 cull_mask = 2
-environment = ExtResource( 5 )
+environment = SubResource( 36 )
 size = 5.0
 far = 40.0
 
@@ -197,22 +243,23 @@ far = 40.0
 environment = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Level/WorldEnvironment"]
-transform = Transform( -0.5, 0.612372, -0.612372, 0, 0.707107, 0.707107, 0.866025, 0.353553, -0.353553, 0, 0, 0 )
+transform = Transform( -0.5, 0.612372, -0.612373, 0, 0.707107, 0.707106, 0.866025, 0.353553, -0.353554, 0.0904217, 0, 0 )
+light_color = Color( 0.909804, 0.733333, 0.627451, 1 )
 light_energy = 6.0
 shadow_enabled = true
-shadow_color = Color( 0.415686, 0.490196, 0.541176, 1 )
+shadow_color = Color( 0.345098, 0.407843, 0.545098, 1 )
 directional_shadow_mode = 0
 
 [node name="Test_Level" parent="Level" instance=ExtResource( 2 )]
 
 [node name="Entity" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.59771, 1.74013, -0.130647 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.59771, 2.44167, -0.130647 )
 material_override = SubResource( 19 )
 generate_lightmap = false
 mesh = SubResource( 14 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Level/Entity"]
-transform = Transform( -4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, 0, 0.478767, -0.365756 )
+transform = Transform( -4.37114e-08, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, 0, 0.591019, -0.852383 )
 mesh = SubResource( 26 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Level"]
@@ -252,51 +299,61 @@ shape = SubResource( 25 )
 
 [node name="bush" type="MeshInstance" parent="Level"]
 transform = Transform( 1.01394, -0.476714, 0, 0.549859, 0.879059, 0, 0, 0, 1, -7.13634, 6.8173, -11.4123 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush6" type="MeshInstance" parent="Level"]
 transform = Transform( -1.14843, -0.0930658, 0, 0.107345, -0.99566, 0, 0, 0, 1, -11.7537, 6.80303, -8.76547 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush2" type="MeshInstance" parent="Level"]
 transform = Transform( -0.217248, -1.98817, -7.40649e-09, 1.21914, -0.133216, -1.57986, 1.57051, -0.171611, 1.22639, -8.68477, 3.55688, -6.97907 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush7" type="MeshInstance" parent="Level"]
 transform = Transform( -0.125243, -1.49112, -5.55487e-09, 0.702832, -0.0999117, -1.1849, 0.9054, -0.128708, 0.919795, -13.9713, 3.10851, -4.62385 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush3" type="MeshInstance" parent="Level"]
 transform = Transform( -0.125291, -0.994083, 0, 0.703099, -0.0666078, -0.78993, 0.905744, -0.0858053, 0.613197, -11.9009, 4.78342, -6.12315 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush4" type="MeshInstance" parent="Level"]
 transform = Transform( -0.125291, -0.994083, 0, 0.703099, -0.0666078, -0.78993, 0.905744, -0.0858053, 0.613197, -6.0507, 5.69706, -6.95404 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush5" type="MeshInstance" parent="Level"]
 transform = Transform( 0.04412, 0.997774, -0.0546163, 0.703099, -0.0666078, -0.78993, -0.913303, -0.00307679, -0.610759, -4.82467, 3.06247, -8.15077 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush10" type="MeshInstance" parent="Level"]
 transform = Transform( 0.02291, 1.24307, -0.0871378, 1.21914, -0.133216, -1.57986, -1.58504, -0.0561957, -1.2184, -4.55052, 2.01301, -12.08 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush11" type="MeshInstance" parent="Level"]
 transform = Transform( 0.656117, 1.16143, 0.408376, 1.21914, -0.133216, -1.57986, -1.44305, 0.446611, -1.15122, -5.65441, 4.80397, -10.0616 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
 [node name="bush9" type="MeshInstance" parent="Level"]
 transform = Transform( 0.0573763, 1.49666, -0.0819244, 0.722825, -0.0994493, -1.31059, -1.3131, 0.010653, -0.725021, 14.2746, 0.887188, -1.03118 )
+visible = false
 material_override = ExtResource( 4 )
 mesh = ExtResource( 3 )
 
@@ -311,6 +368,12 @@ mesh = SubResource( 32 )
 [node name="MeshInstance3" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.84457, 5.48171, 26.8028 )
 mesh = SubResource( 32 )
+
+[node name="tile_Test" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.134051, 10.953 )
+visible = false
+material_override = SubResource( 33 )
+mesh = SubResource( 34 )
 
 [node name="MonitorOverlay" type="VBoxContainer" parent="."]
 margin_right = 159.0
@@ -525,3 +588,37 @@ margin_left = 1560.0
 margin_right = 1608.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
+
+[node name="plant" type="MeshInstance" parent="."]
+transform = Transform( 0.98492, 0.172779, 0.0089854, -0.173012, 0.983591, 0.0511519, 0, -0.0519351, 0.99865, -11.9351, 1.86314, -4.16761 )
+material_override = SubResource( 35 )
+mesh = ExtResource( 8 )
+
+[node name="plant3" type="MeshInstance" parent="."]
+transform = Transform( 0.928319, -0.100735, 0.357876, 0.249542, 0.882373, -0.398932, -0.275594, 0.459642, 0.844261, -6.54638, 2.50089, -6.50072 )
+material_override = SubResource( 35 )
+mesh = ExtResource( 8 )
+
+[node name="plant4" type="MeshInstance" parent="."]
+transform = Transform( 0.928319, -0.100735, 0.357876, 0.327368, 0.677733, -0.658413, -0.176219, 0.728376, 0.66213, -9.56674, 5.32707, -6.39567 )
+material_override = SubResource( 35 )
+mesh = ExtResource( 8 )
+
+[node name="plant2" type="MeshInstance" parent="."]
+transform = Transform( 0.885532, 0.259103, 0.385616, -0.0934961, 0.912441, -0.398384, -0.455074, 0.316728, 0.832221, -13.605, 4.00571, -6.49847 )
+material_override = SubResource( 35 )
+mesh = ExtResource( 8 )
+
+[node name="tree_1" type="MeshInstance" parent="."]
+transform = Transform( 0.452609, 0, -0.77791, 0, 0.9, 0, 0.77791, 0, 0.452609, 12.6291, 1.80657, -10.8496 )
+material_override = SubResource( 37 )
+mesh = ExtResource( 5 )
+
+[node name="leaves_blob" type="MeshInstance" parent="tree_1"]
+material_override = ExtResource( 16 )
+mesh = ExtResource( 14 )
+
+[node name="leaves_cards" type="MeshInstance" parent="tree_1"]
+material_override = ExtResource( 4 )
+cast_shadow = 0
+mesh = ExtResource( 15 )
