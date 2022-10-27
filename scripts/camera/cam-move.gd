@@ -24,7 +24,7 @@ var zoom_time = 0.15
 
 
 var min_zoom = 0
-var max_zoom = 20
+var max_zoom = 25
 
 var follow_target = null setget set_follow_target
 var follow_target_tag_distance = 4

@@ -132,11 +132,16 @@ func generate_grass():
 
 
 func get_atlas_code() -> float:
-	var x_range = [0, 1, 2]
+	var x_range = [0, 1, 2, 3, 4]
 	var y_range = [0]
 	
 	var x : float = Utils._rng.randi_range(0, x_range.size()-1)
 	var y : float = Utils._rng.randi_range(0, y_range.size()-1)
+	
+	if Utils._rng.randi_range(0, 1) == 0:
+		x = 0
+	
+	
 	var code : float = x + (y / 10.0)
 	return code
 
